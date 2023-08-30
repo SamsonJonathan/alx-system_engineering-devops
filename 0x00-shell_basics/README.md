@@ -1,1 +1,0 @@
-README for shell basics

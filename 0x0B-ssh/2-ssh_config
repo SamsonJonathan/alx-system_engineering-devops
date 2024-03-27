@@ -1,0 +1,5 @@
+# Configures a local ssh client to connect to a server without pwd
+
+Host 54.152.141.213
+	PasswordAuthentication no
+	IdentifyFile ~/.ssh/school

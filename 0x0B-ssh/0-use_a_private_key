@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-# this script connects to the server provided by alx
+# Connect to a server with a specified private key
 
-ssh -i /root/.ssh/ ubuntu@54.152.141.213
+ssh -i ~/.ssh/id_rsa ubuntu@54.152.141.213
+=======
+ssh -i ~/.ssh/school ubuntu@54.152.141.213

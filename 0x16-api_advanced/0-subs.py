@@ -1,4 +1,4 @@
-#!/usr/lib/python3/dist-packages
+#!/usr/bin/python3/
 """
     Task 0
 """

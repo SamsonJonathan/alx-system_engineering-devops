@@ -1,26 +1,32 @@
-#!/usr/bin/python3/
-"""
-    Task 0
-"""
-import requests
-
+import urllib.request
+import json
 
 def number_of_subscribers(subreddit):
-    """
-        Returns the number of subscribers for a given subreddit.
-        Returns 0 if invalid subreddit was given
-    """
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-
-    """https://stackoverflow.com/questions/10606133/"""
+    # Reddit API endpoint for subreddit information
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    
+    # Custom User-Agent to avoid Too Many Requests errors
     headers = {
-            "User-Agent": "redditdev scraper by u/coderboy-exe",
-            "From": "coderboy.exe@gmail.com"
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
-
-    res = requests.get(url, headers=headers)
-    if res.status_code == 200:
-        data = res.json()
-        return data.get("data").get("subscribers")
-    else:
+    
+    try:
+        # Create a Request object with the URL and headers
+        req = urllib.request.Request(url, headers=headers)
+        
+        # Open the URL and read the response
+        with urllib.request.urlopen(req) as response:
+            if response.getcode() == 200:
+                # Read and decode the response
+                data = json.loads(response.read().decode())
+                
+                # Extract and return the number of subscribers
+                return data['data']['subscribers']
+            else:
+                # If the subreddit is invalid or any other error occurs, return 0
+                return 0
+    
+    except Exception as e:
+        # If any exception occurs during the process, return 0
+        print(f"An error occurred: {e}")
         return 0
